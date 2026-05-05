@@ -52,11 +52,9 @@ describe('Phase 6 - embed et upsert (unit + integration)', () => {
 
     test('deux textes similaires ont des embeddings proches', async () => {
       const { getEmbedding } = await import('../src/rag/embed.js');
-      const [e1, e2, e3] = await Promise.all([
-        getEmbedding('Le chat dort sur le canape'),
-        getEmbedding('Le felin se repose sur le sofa'),
-        getEmbedding('La bourse de Tokyo baisse fortement')
-      ]);
+      const e1 = await getEmbedding('Le chat dort sur le canape');
+      const e2 = await getEmbedding('Le felin se repose sur le sofa');
+      const e3 = await getEmbedding('La bourse de Tokyo baisse fortement');
 
       const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
       const norm = a => Math.sqrt(a.reduce((s, x) => s + x * x, 0));

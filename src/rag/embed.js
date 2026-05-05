@@ -1,20 +1,27 @@
 import 'dotenv/config';
 
-export async function getEmbedding(text) {
-  const response = await fetch('https://api.mistral.ai/v1/embeddings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.MISTRAL_API_KEY}`
-    },
-    body: JSON.stringify({ model: 'mistral-embed', input: text })
-  });
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Mistral embeddings error ${response.status}: ${err}`);
+export async function getEmbedding(text, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    const response = await fetch('https://api.mistral.ai/v1/embeddings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.MISTRAL_API_KEY}`
+      },
+      body: JSON.stringify({ model: 'mistral-embed', input: text })
+    });
+    if (response.status === 429 && attempt < maxRetries - 1) {
+      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+      continue;
+    }
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Mistral embeddings error ${response.status}: ${err}`);
+    }
+    const data = await response.json();
+    return data.data[0].embedding;
   }
-  const data = await response.json();
-  return data.data[0].embedding;
+  throw new Error('Mistral embeddings: rate limit atteint apres plusieurs tentatives');
 }
 
 export function simpleChunk(text, maxWords = 50) {
