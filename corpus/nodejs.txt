@@ -1,0 +1,20 @@
+Node.js est un environnement d'execution JavaScript cote serveur, cree par Ryan Dahl en 2009.
+Il utilise le moteur V8 de Google Chrome pour executer du JavaScript hors du navigateur.
+Node.js est particulierement performant pour les applications I/O-intensives grace a son architecture evenementielle non bloquante.
+npm (Node Package Manager) est le gestionnaire de paquets officiel de Node.js, lance en 2010.
+Node.js utilise un modele d'entrees/sorties asynchrones base sur les evenements et les callbacks.
+Express.js est le framework web le plus populaire pour Node.js, sorti en 2010.
+Node.js est base sur le modele de programmation evenementielle avec une boucle d'evenements (event loop) a un seul thread.
+Le fichier package.json est le manifeste de chaque projet Node.js : il liste les dependances, les scripts et les metadonnees.
+Node.js supporte les modules ES (import/export) depuis la version 12 avec le champ "type": "module" dans package.json.
+La version 22 de Node.js est une version LTS (Long Term Support), sortie en avril 2024.
+CommonJS utilise require() et module.exports, tandis que les modules ES utilisent import et export.
+Node.js convient particulierement aux APIs REST, aux applications temps reel (chat, websockets) et aux microservices.
+Deno est une alternative a Node.js creee en 2018 par Ryan Dahl lui-meme, avec TypeScript integre et sans node_modules.
+Bun est un autre runtime JavaScript cree en 2022, connu pour ses performances elevees et sa compatibilite avec npm.
+Le gestionnaire de versions nvm (Node Version Manager) permet d'installer et basculer entre plusieurs versions de Node.js.
+Les streams Node.js permettent de traiter des donnees volumineuses sans les charger entierement en memoire.
+Le module fs (file system) de Node.js permet de lire et ecrire des fichiers de maniere synchrone et asynchrone.
+Le module http de Node.js permet de creer des serveurs web sans framework externe.
+Les workers threads de Node.js permettent l'execution de code JavaScript en parallele sur plusieurs threads.
+Node.js utilise libuv pour abstraire les operations d'entrees/sorties sur differents systemes d'exploitation.
